@@ -27,6 +27,35 @@
     return YES;
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint firstTouch = [touch locationInView:self.view];
+    for (UIView *view in viewArray) {
+        if (CGRectContainsPoint(view.frame, firstTouch)) {
+            toMove = view;
+        }
+    }
+    
+    NSLog(@"Touch Began");
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    currentTouch = [touch locationInView:self.view];
+    toMove.center = currentTouch;
+    
+    NSLog(@"Touch Moved");
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    currentTouch = [touch locationInView:self.view];
+    toMove.center = currentTouch;
+    
+    NSLog(@"Touch Ended");
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear: animated];
@@ -141,6 +170,8 @@
             anotherView.layer.cornerRadius = 25;
             anotherView.backgroundColor = [UIColor blackColor];
             
+            [viewArray insertObject:bubble atIndex:0];
+            
             [self.view addSubview: bubble];
             [gravityBehavior addItem: bubble];
             [collisionBehavior addItem: bubble];
@@ -177,7 +208,16 @@
         UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems: @[_blueBubble, _purpleBubble, _yellowBubble, _redBubble, _greenBubble]];
         CGVector gravityDirection = {0.0, 1.0};
         [gravityBehavior setGravityDirection:gravityDirection];
+        
         [_animator addBehavior: gravityBehavior];
+        
+        UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems: @[_blueBubble, _purpleBubble, _yellowBubble, _redBubble, _greenBubble, _bigBubble]];
+        collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
+        
+        
+        [_animator addBehavior: collisionBehavior];
+        
+        
     }
     
 }

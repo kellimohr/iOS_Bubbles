@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface KMViewController : UIViewController
+{
+    CGPoint currentTouch;
+    NSMutableArray *viewArray;
+    UIView *toMove;
+}
+- (IBAction)add:(id)sender;
 
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *bubbleViews;
 
