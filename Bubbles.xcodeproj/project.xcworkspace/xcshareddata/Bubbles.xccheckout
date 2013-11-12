@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4AFC5B96-67CB-44A8-9439-BFB32422D63E</string>
+	<string>9EB22CFF-9AC7-4326-B4E5-71DFFBB2BD3D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Bubbles</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>92B4A3A8-2C09-43F4-8659-DACBCBD3BE2E</key>
-		<string>ssh://github.com/kellimohr/iOS_Bubbles.git</string>
+		<key>B477180D-B7FC-4EEB-965F-8F54CBB05AFC</key>
+		<string>ssh://github.com/csgreen/iOS_Bubbles.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Bubbles.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>92B4A3A8-2C09-43F4-8659-DACBCBD3BE2E</key>
+		<key>B477180D-B7FC-4EEB-965F-8F54CBB05AFC</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/kellimohr/iOS_Bubbles.git</string>
+	<string>ssh://github.com/csgreen/iOS_Bubbles.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>92B4A3A8-2C09-43F4-8659-DACBCBD3BE2E</string>
+	<string>B477180D-B7FC-4EEB-965F-8F54CBB05AFC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>92B4A3A8-2C09-43F4-8659-DACBCBD3BE2E</string>
+			<string>B477180D-B7FC-4EEB-965F-8F54CBB05AFC</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Bubbles</string>
+			<string>iOS_Bubbles</string>
 		</dict>
 	</array>
 </dict>
