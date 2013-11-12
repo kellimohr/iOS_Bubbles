@@ -56,9 +56,24 @@
     NSLog(@"Touch Ended");
 }
 
+- (void)handleTap:(UITapGestureRecognizer *)recognizer
+{
+//    CGPoint location = [recognizer locationInView:self.view];
+//    [self drawImageForGestureRecognizer:recognizer atPoint:location];
+//    
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.sender.alpha = 0.0;
+//    }];
+    
+    NSLog(@"was tapped");
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear: animated];
+    
+    
     
     [self becomeFirstResponder];
     
@@ -140,7 +155,7 @@
     _purpleBubbleSmall.backgroundColor = [UIColor purpleColor];
     [_greenBubble addSubview:_purpleBubbleSmall];
     
-   // UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems: self.bubbleViews];
+    // UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems: self.bubbleViews];
     UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems: @[_blueBubble, _purpleBubble, _yellowBubble, _redBubble, _greenBubble]];
     
     CGVector gravityDirection = {0.0, -1.0};
@@ -157,12 +172,14 @@
     
     for (UIView *bubbleView in self.bubbleViews)
     {
+        
         for (int i = 0; i < 10; i++)
         {
             int xPos = arc4random() %300;
             int yPos = arc4random() %400;
             
             UIView *bubble = [[UIView alloc] initWithFrame:CGRectMake(xPos,yPos,50,50)];
+            //            [bubble addGestureRecognizer:tapGestureRecognizer];
             bubble.alpha = 0.5;
             bubble.layer.cornerRadius = 25;
             bubble.backgroundColor = [UIColor blueColor];
@@ -193,10 +210,13 @@
             [self.view addSubview: anotherView];
             [collisionBehavior addItem: anotherView];
             
-       //     UITapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
+        }
+        for (UIView *view in viewArray) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+            tapGestureRecognizer.numberOfTapsRequired = 1;
+            [view addGestureRecognizer:tapGestureRecognizer];
         }
     }
-     
 }
 
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -233,9 +253,10 @@
     
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated {
-	[self resignFirstResponder];
-	[super viewWillDisappear:animated];
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
