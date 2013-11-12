@@ -14,7 +14,6 @@
     NSMutableArray *viewArray;
     UIView *toMove;
 }
-- (IBAction)add:(id)sender;
 
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *bubbleViews;
 
