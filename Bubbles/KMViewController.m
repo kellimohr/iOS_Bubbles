@@ -27,11 +27,42 @@
     return YES;
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint firstTouch = [touch locationInView:self.view];
+    for (UIView *view in viewArray) {
+        if (CGRectContainsPoint(view.frame, firstTouch)) {
+            toMove = view;
+        }
+    }
+    
+    NSLog(@"Touch Began");
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    currentTouch = [touch locationInView:self.view];
+    toMove.center = currentTouch;
+    
+    NSLog(@"Touch Moved");
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    currentTouch = [touch locationInView:self.view];
+    toMove.center = currentTouch;
+    
+    NSLog(@"Touch Ended");
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear: animated];
     
     [self becomeFirstResponder];
+    
+    viewArray = [[NSMutableArray alloc] init];
     
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView: self.view];
     
@@ -40,6 +71,7 @@
     _blueBubble.layer.cornerRadius = 25;
     _blueBubble.backgroundColor = [UIColor blueColor];
     [self.view addSubview:_blueBubble];
+    [viewArray addObject:_blueBubble];
     
     _purpleBubble = [[UIView alloc] initWithFrame:CGRectMake(200,400,50,50)];
     _purpleBubble.alpha = 0.5;
@@ -49,6 +81,7 @@
     _purpleBubble.layer.shadowOpacity = 1.0f;
     _purpleBubble.layer.shadowRadius = 8.0f;
     [self.view addSubview:_purpleBubble];
+    [viewArray addObject:_purpleBubble];
     
     _yellowBubble = [[UIView alloc] initWithFrame:CGRectMake(50,400,50,50)];
     _yellowBubble.alpha = 0.5;
@@ -58,6 +91,7 @@
     _yellowBubble.layer.shadowOpacity = 1.0f;
     _yellowBubble.layer.shadowRadius = 8.0f;
     [self.view addSubview:_yellowBubble];
+    [viewArray addObject:_yellowBubble];
     
     _redBubble = [[UIView alloc] initWithFrame:CGRectMake(75,450,50,50)];
     _redBubble.alpha = 0.5;
@@ -67,12 +101,14 @@
     _redBubble.layer.shadowOpacity = 1.0f;
     _redBubble.layer.shadowRadius = 8.0f;
     [self.view addSubview:_redBubble];
+    [viewArray addObject:_yellowBubble];
     
     _greenBubble = [[UIView alloc] initWithFrame:CGRectMake(175,450,50,50)];
     _greenBubble.alpha = 0.5;
     _greenBubble.layer.cornerRadius = 25;
     _greenBubble.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_greenBubble];
+    [viewArray addObject:_greenBubble];
     
     _greenBubbleSmall = [[UIView alloc] initWithFrame:CGRectMake(25,25,10,10)];
     _greenBubbleSmall.alpha = 0.5;
@@ -141,6 +177,11 @@
             anotherView.layer.cornerRadius = 25;
             anotherView.backgroundColor = [UIColor blackColor];
             
+            [viewArray addObject:bubble];
+            [viewArray addObject:innerView];
+            [viewArray addObject:anotherView];
+            
+            
             [self.view addSubview: bubble];
             [gravityBehavior addItem: bubble];
             [collisionBehavior addItem: bubble];
@@ -172,12 +213,22 @@
         _bigBubble.layer.shadowOpacity = 1.0f;
         _bigBubble.layer.shadowRadius = 8.0f;
         [self.view addSubview:_bigBubble];
+        [viewArray addObject:_bigBubble];
         
         
         UIGravityBehavior *gravityBehavior = [[UIGravityBehavior alloc] initWithItems: @[_blueBubble, _purpleBubble, _yellowBubble, _redBubble, _greenBubble]];
         CGVector gravityDirection = {0.0, 1.0};
         [gravityBehavior setGravityDirection:gravityDirection];
+        
         [_animator addBehavior: gravityBehavior];
+        
+        UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems: @[_blueBubble, _purpleBubble, _yellowBubble, _redBubble, _greenBubble, _bigBubble]];
+        collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
+        
+        
+        [_animator addBehavior: collisionBehavior];
+        
+        
     }
     
 }
